@@ -1,0 +1,13 @@
+services:
+  logfix:
+    build: .
+    ports:
+      - "8000:8000"          # put a TLS reverse proxy (nginx/Caddy/ALB) in front for anything but local use
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - logfix-data:/data     # SQLite DB, generated keys. Single instance only.
+    restart: unless-stopped
+volumes:
+  logfix-data:

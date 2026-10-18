@@ -1,0 +1,10 @@
+#cloud-config
+# Azure VM (Ubuntu 22.04): installs Docker and runs LogFix AI from /opt/logfix.
+# Assign a system-assigned managed identity with "Log Analytics Reader" on the workspace.
+package_update: true
+packages: [docker.io]
+runcmd:
+  - systemctl enable --now docker
+  - mkdir -p /opt/logfix
+  # copy project into /opt/logfix, then:
+  - cd /opt/logfix && docker build -t logfix-ai . && docker run -d --name logfix --restart unless-stopped -p 127.0.0.1:8000:8000 -v logfix-data:/data logfix-ai

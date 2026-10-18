@@ -1,0 +1,5 @@
+db:
+  host: db.internal
+  pool:
+    max: 5        # deployed in v2.14.0; was 50 before
+    acquire_timeout_ms: 30000

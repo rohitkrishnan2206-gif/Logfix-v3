@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadCloudWatchLogsOnly",
+      "Effect": "Allow",
+      "Action": ["logs:FilterLogEvents", "logs:DescribeLogGroups", "logs:DescribeLogStreams"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "InvokeBedrockModel",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel"],
+      "Resource": [
+        "arn:aws:bedrock:*::foundation-model/anthropic.claude-*",
+        "arn:aws:bedrock:*:*:inference-profile/us.anthropic.claude-*"
+      ]
+    }
+  ]
+}
